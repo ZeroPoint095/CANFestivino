@@ -1,4 +1,4 @@
-This repo is part of a student project for the minor Intelligent Mobility at Rotterdam University of Applied Sciences (Hogeschool Rotterdam).
+This repo is part of a student project for the minor Intelligent Mobility at Rotterdam University of Applied Sciences (Hogeschool Rotterdam). It was used in [CargoDash](https://github.com/ZeroPoint095/CargoDash), a diagnostics tool for developing autonomous vehicles.
 
 The original CanFestivino repo this is forked from had, at the time, been inactive for 6 years and was written in the depricated Python version 2, but was the only resource available with an example of CanOpen using Arduino. We made some minor changes in order to get the code working and making it easier to use.
 
