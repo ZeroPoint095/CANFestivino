@@ -56,7 +56,8 @@ UNS32 writeActuatorCallback(const subindex * OD_entry, UNS16 bIndex, UNS8 bSubin
 }
 
 void setup() {
-  co.CO_Init(CAN_500KBPS, MCP_8MHz); //intialise canopen via canbus
+  co.CO_Init(CAN_500KBPS, MCP_16MHz); //intialise canopen via canbus
+  //You can change CS pin in CO_can_Arduino.cpp line 8 (default: 10)
 
   pinMode(SENSOR_PIN, INPUT); //setup potmeter pin
   actuator.attach(ACTUATOR_PIN); //attach datapin of servo
