@@ -22,9 +22,8 @@ UNS8 canSend(Message *m) {
 
 
 
-void initCAN() {
-    // TODO: make baud rate variable
-  while(CAN.begin(CAN_500KBPS)!=0) delay(1000);
+void initCAN(const INT8U canSpeed, const INT8U clock) {
+  while(CAN.begin(canSpeed, clock)!=0) delay(1000);
 
   CAN.init_Mask(0,0, 0x007E); // allow two consecutive ids
   CAN.init_Filt(0,0, getNodeId()); // RxPDO and SDO

@@ -56,7 +56,7 @@ UNS32 writeActuatorCallback(const subindex * OD_entry, UNS16 bIndex, UNS8 bSubin
 }
 
 void setup() {
-  co.CO_Init(); //intialise canopen via canbus
+  co.CO_Init(CAN_500KBPS, MCP_8MHz); //intialise canopen via canbus
 
   pinMode(SENSOR_PIN, INPUT); //setup potmeter pin
   actuator.attach(ACTUATOR_PIN); //attach datapin of servo
