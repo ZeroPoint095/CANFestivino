@@ -66,7 +66,7 @@ dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
 dtoverlay=sp1-bcm2835-overlay
 ```
 
-The `16000000` stands that the MCP2515 operates with a clock of 16 MHz. This depends on the quartz used and may need to be adjusted.
+The `16000000` means that the MCP2515 operates with a clock of 16 MHz. This depends on the quartz used and may need to be adjusted.
  The SBC-CAN01 uses a 16MHz clock, so you can leave this unchanged.
  
 Save the file with the key combination `CTRL+O`, confirm the saving process with `Enter`, and exit the editor with the combination `CTRL+X`.
@@ -97,6 +97,8 @@ Then in the *other* terminal, run the following command:
 ```
 cansend can0 127#DEADBEEF
 ```
+> Note that you must have a 120 Ohm terminal resistor at the other ends of the CAN-H and CAN-L lines. Most CANBUS modules have a jumper enabling the built-in terminal resistor. This may need to be powered or grounded to work, depending on the module.
+
 In the window running candump, you should see something similar to the following:
 
 ```
@@ -109,7 +111,7 @@ Stop running candump with the key combination `CTRL+C`
 We're almost ready to start running the example CanOpen network. First, install CanOpen for Python with the following command:
 
 ```
-pip install canopen
+pip3 install canopen
 ```
 Now, open `canopen_master_example.py` in Thonny or your favorite IDE. If you were to run this, you will get `SdoCommunicationError("No SDO response received")`. This is because we still need to setup our Arduino slave node
 
