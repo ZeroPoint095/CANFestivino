@@ -14,8 +14,8 @@ The Arduino must be running Canfestivino with .EDS and .CPP files made in ObjDic
 
 network = canopen.Network()
 
-master_node = canopen.LocalNode(1, 'master.eds')
-slave_node = canopen.RemoteNode(5,'slave_node_example.eds') #.eds and object dictionary are interchangable
+master_node = canopen.LocalNode(0x01, 'master.eds')
+slave_node = canopen.RemoteNode(0x05,'slave_node_example.eds') #.eds and object dictionary are interchangable
 network.add_node(master_node)
 network.add_node(slave_node)
 
