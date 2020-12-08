@@ -160,7 +160,7 @@ Unpack the Gnosis Utils and go the folder with the following commands:
 
 ```
 tar xzvf Gnosis_Utils-current.tar.gz
-cd Gnosis_Utils-current/Gnosis_Utils-1.2.2/
+cd Gnosis_Utils-1.2.2/
 ```
 Then run the setup using python2 with the following command:
 
@@ -179,6 +179,9 @@ python2 objdictedit.py
 ```
 
 ### Starting objdictedit.py and opening the .EDS
+> During development, we came across a bug that seems to happen when running objdictedit.py on a Raspberry Pi. The easiest workaround is to close the window via the task bar, save your changes, close objdictgen.py and then running the .py again. Ubuntu systems seems to be uneffected, so please use Ubuntu whenever possible.
+
+
 From the `objdictgen` folder, run the editor with the following command:
 
 ```
@@ -190,7 +193,7 @@ There are some example files in `/examples`. `slave_node_example.od` is the same
 
 ### Changing .eds to fit your network
 First, be sure to change the name and ID of your node with `Edit > Node infos`
-> The CanOpen protocol gives the highest priority to the lowest ID number. Be sure to number your nodes accordingly
+> The CanOpen protocol gives the highest priority to the lowest ID number. Be sure to number your nodes accordingly, with your master node being 0x00 (therefore having the highest priority).
 
 #### Adding or changing your own inputs and outputs
 Under `0x2000-0x5FFF Manufacturer Specific` you can edit the existing `Sensor` and `Actuator` by `Right-Click > Rename` on either, and clicking on them and editing their fields on the right.
@@ -201,8 +204,8 @@ However we recommend deleting these and adding new components according to the s
 Receive PDO's are the commands received from the network to the node. These are eg. values to move an actuator such as a servo.
 
 On the top left, click on `0x1600-17FF Receive PDO Mapping`.
-On the bottom left, click on `0x1600 Receive PDO 1 Mapping`. If this does not exist, click `Add: PDO Receive`
-On the bottom right, make sure `Have Callbacks` is checked
+On the bottom left, click on `0x1600 Receive PDO 1 Mapping`. If this does not exist, click `Add: PDO Receive`.
+On the bottom right, make sure `Have Callbacks` is checked.
 On `subindex 0x01`, change the `value` to map to the desired `Manufacturer Specific` object by double-clicking on it and selecting the desired object from the dropdown list.
 Continue adding `PDO Receive`s for all of your expecting incoming messages, remembering to check `Have Callbacks`.
 
@@ -210,8 +213,8 @@ Continue adding `PDO Receive`s for all of your expecting incoming messages, reme
 Transmit PDO's is the data transmitted from the node to the network after receiving a request for said data. These are eg. values read from a sensor such as a distance or temperature sensor.
 
 On the top left, click on `0x1A00-1BFF Transmit PDO Mapping`.
-On the bottom left, click on `0x1A00 Transmit PDO 1 Mapping`. If this does not exist, click `Add: PDO Transmit`
-On the bottom right, make sure `Have Callbacks` is checked
+On the bottom left, click on `0x1A00 Transmit PDO 1 Mapping`. If this does not exist, click `Add: PDO Transmit`.
+On the bottom right, make sure `Have Callbacks` is checked.
 On `subindex 0x01`, change the `value` to map to the desired `Manufacturer Specific` object by double-clicking on it and selecting the desired object from the dropdown list.
 Continue adding `PDO Transmit`s for all of your expecting outgoing messages, remembering to check `Have Callbacks`.
 
@@ -253,7 +256,7 @@ In the `void setup()`, you must now map your callback functions to the correspon
 RegisterSetODentryCallBack([index], [subindex], [callback function])
 ```
 Where `index` is the index number of the Manufacturer Specific object you defined in the .od/.eds.
-`subindex` should be 0, unless you defined a subindex
+`subindex` should be 0, unless you defined your Manufacturer Specific object as an array. Then the desired subindex should be used.
 `callback function` is the callback function you defined earlier in the step above.
 
 In the example, these are enclosed in print statements, as these will return an error code if something went wrong (otherwise simply `0` if it was successful.
