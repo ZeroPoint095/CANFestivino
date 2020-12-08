@@ -41,7 +41,7 @@ public:
     }
     ;
     void CO_Cycle();
-    void CO_Init();
+    void CO_Init(const INT8U canSpeed, const INT8U clock);
 
 private:
     static void errorStateBlink(uint8_t dummy);
@@ -49,13 +49,13 @@ private:
     Message m;
 };
 
-template<int redLEDPin, int greenLEDPin> void CO<redLEDPin, greenLEDPin>::CO_Init() {
+template<int redLEDPin, int greenLEDPin> void CO<redLEDPin, greenLEDPin>::CO_Init(const INT8U canSpeed, const INT8U clock) {
     if(redLEDPin>0) pinModeFast(redLEDPin, OUTPUT);
     if(greenLEDPin>0) pinModeFast(greenLEDPin, OUTPUT);
     if(redLEDPin>0) digitalWriteFast(redLEDPin, 1);
     if(greenLEDPin>0) digitalWriteFast(greenLEDPin, 1);
 
-    initCAN();
+    initCAN(canSpeed, clock);
 
     setState(Initialisation);
 

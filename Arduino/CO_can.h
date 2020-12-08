@@ -42,6 +42,6 @@ typedef struct {
 extern MCP_CAN CAN;
 
 UNS8 canSend(Message *m);
-void initCAN();
+void initCAN(const INT8U canSpeed, const INT8U clock);
 
 #endif /* __can_h__ */
